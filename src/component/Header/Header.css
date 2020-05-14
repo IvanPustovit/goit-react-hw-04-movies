@@ -1,0 +1,15 @@
+.home {
+  margin-top: 20px;
+  /* text-decoration: none; */
+  padding: 10px;
+  font-size: 20px;
+  /* color: brown; */
+}
+
+.header {
+  padding-top: 10px;
+  border-bottom: 2px;
+  box-shadow: burlywood;
+
+  margin-bottom: 15px;
+}
