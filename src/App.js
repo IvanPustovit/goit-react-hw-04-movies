@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { Route, Switch, Redirect, Router } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Header from "./component/Header/Header";
 import { routes } from "./utils/routes";
 
