@@ -1,2 +1,0 @@
-(this.webpackJsonph4=this.webpackJsonph4||[]).push([[8],{79:function(e,t,n){"use strict";n.r(t);var a=n(33),c=n(0),u=n.n(c),r=n(32);t.default=function(e){var t=Object(c.useState)([]),n=Object(a.a)(t,2),i=n[0],l=n[1],s=e.match.params.movieId;return Object(c.useEffect)((function(){Object(r.e)(s).then((function(e){return l(e.results)}))}),[s]),u.a.createElement("div",null,i.map((function(e){return u.a.createElement("div",{key:e.id},u.a.createElement("h3",null,e.author),u.a.createElement("p",null,e.content))})))}}}]);
-//# sourceMappingURL=8.fe3efee9.chunk.js.map
