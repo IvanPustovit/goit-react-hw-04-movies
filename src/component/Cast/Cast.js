@@ -1,29 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { fetchCast } from "../../utils/apiRequest";
+import { imgUrl } from "../../api";
 
 const Cast = (props) => {
-  const [castInfo, setCastInfo] = useState([]);
+  const [casts, setCasts] = useState([]);
+  const [error, setError] = useState("");
   const movieId = props.match.params.movieId;
 
   useEffect(() => {
-    fetchCast(movieId).then((res) => {
-      setCastInfo(res.cast);
-    });
+    fetchCast(movieId)
+      .then((res) => {
+        setCasts(res.cast);
+      })
+      .catch((error) => setError(error));
   }, [movieId]);
+
+  const styleImg = {
+    width: "200px",
+  };
 
   return (
     <div>
       <ul>
-        {castInfo.map((el) => (
-          <li key={el.id}>
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${el.profile_path}`}
-              alt={el.name}
-            />
-            <h3>{el.name}</h3>
-            <p>Character: {el.character}</p>
-          </li>
-        ))}
+        {error && <>Something went wrong</>}
+        {!error &&
+          casts &&
+          casts.map(({ id, name, character, profile_path }) => (
+            <li key={id}>
+              <img src={imgUrl + profile_path} alt={name} style={styleImg} />
+              <h3>{name}</h3>
+              <p>Character: {character}</p>
+            </li>
+          ))}
       </ul>
     </div>
   );

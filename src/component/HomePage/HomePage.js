@@ -4,21 +4,24 @@ import { Link, useLocation } from "react-router-dom";
 
 const HomePage = () => {
   const [movie, setMovie] = useState([]);
+  const [error, setError] = useState("");
+
   const location = useLocation();
 
   useEffect(() => {
-    fetchHomePage().then((res) => setMovie(res));
+    fetchHomePage()
+      .then((res) => setMovie(res))
+      .catch((error) => setError(error));
   }, []);
 
   return (
     <>
       <ul>
-        {movie.map((el) => (
-          <li key={el.id}>
-            <Link
-              to={{ pathname: `/movies/${el.id}`, state: { from: location } }}
-            >
-              {el.title}
+        {error && <>Something went wrong</>}
+        {movie.map(({ id, title }) => (
+          <li key={id}>
+            <Link to={{ pathname: `/movies/${id}`, state: { from: location } }}>
+              {title}
             </Link>
           </li>
         ))}

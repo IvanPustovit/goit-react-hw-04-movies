@@ -3,18 +3,23 @@ import { fetchReviews } from "../../utils/apiRequest";
 
 const Reviews = (props) => {
   const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState("");
+
   const movieId = props.match.params.movieId;
 
   useEffect(() => {
-    fetchReviews(movieId).then((res) => setReviews(res.results));
+    fetchReviews(movieId)
+      .then((res) => setReviews(res.results))
+      .catch((error) => setError(error));
   }, [movieId]);
 
   return (
     <div>
-      {reviews.map((el) => (
-        <div key={el.id}>
-          <h3>{el.author}</h3>
-          <p>{el.content}</p>
+      {error && <>Something went wrong</>}
+      {reviews.map(({ id, author, content }) => (
+        <div key={id}>
+          <h3>{author}</h3>
+          <p>{content}</p>
         </div>
       ))}
     </div>

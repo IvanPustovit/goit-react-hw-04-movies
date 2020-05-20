@@ -12,12 +12,15 @@ const Reviews = lazy(() => import("../Reviews/Reviews"));
 
 const MovieDetailsPage = (props) => {
   const [movieDetails, setMovieDetails] = useState({});
+  const [error, setError] = useState("");
 
   const movieId = props.match.params.movieId;
   useEffect(() => {
-    fetchMovieDetails(movieId).then((res) => {
-      setMovieDetails(res);
-    });
+    fetchMovieDetails(movieId)
+      .then((res) => {
+        setMovieDetails(res);
+      })
+      .catch((error) => setError(error));
   }, [movieId]);
 
   const handleGoBack = () => {
@@ -34,6 +37,8 @@ const MovieDetailsPage = (props) => {
 
   return (
     <div>
+      {error && <>Something went wrong</>}
+
       <button onClick={handleGoBack}>Go back</button>
       <div>
         <img
